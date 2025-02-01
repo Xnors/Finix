@@ -13,3 +13,7 @@ func CheckDataDirExistsOrCreate() {
 		os.Mkdir(TABLES_DIR, 0755)
 	}
 }
+
+func TablePath(tableName string) string {
+	return TABLES_DIR + "/" + tableName + ".toml"
+}
