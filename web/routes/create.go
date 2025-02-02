@@ -19,7 +19,7 @@ func RCreate(c *gin.Context) {
 		return
 	}
 
-	cmd := exec.Command("cmd", "/c", consts.CLI_PATH, "create", c.Query("table_name"))
+	cmd := exec.Command(consts.CLI_PATH(), "create", c.Query("table_name"))
 	// 创建一个Buffer来捕获输出
 	var out bytes.Buffer
 	cmd.Stdout = &out
@@ -27,7 +27,12 @@ func RCreate(c *gin.Context) {
 		fmt.Println("ran command failed: ", cmd.String(), out.String())
 		c.JSON(
 			http.StatusOK,
-			gin.H{"status": "error", "message": fmt.Sprintf("Error When CREATE TABLE %s: %s", table_name, strings.Trim(out.String(), "\n"))},
+			gin.H{
+				"status": "error",
+				"table_name": table_name,
+				"output":     strings.Trim(out.String(), "\n"),
+				"error":      err.Error(),
+			},
 		)
 		return
 	}
