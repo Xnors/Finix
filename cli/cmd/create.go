@@ -3,9 +3,10 @@ package cmd
 import (
 	"errors"
 	"fmt"
-	"github.com/spf13/cobra"
 	"os"
 	"time"
+
+	"github.com/spf13/cobra"
 )
 
 func createTable(tb_name string) error {
@@ -46,12 +47,12 @@ var CreateCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		if len(args) == 0 {
 			fmt.Println("请指定表名")
-			return
+			os.Exit(1)
 		}
 		err := createTable(args[0])
 		if err != nil {
 			fmt.Println(err)
-			return
+			os.Exit(1)
 		}
 	},
 }

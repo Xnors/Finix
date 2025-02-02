@@ -38,12 +38,12 @@ var DeleteCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		if len(args) == 0 {
 			fmt.Println("请指定表名")
-			return
+			os.Exit(1)
 		}
 		err := deleteTable(args[0])
 		if err != nil {
 			fmt.Println(err)
-			return
+			os.Exit(1)
 		}
 	},
 }
