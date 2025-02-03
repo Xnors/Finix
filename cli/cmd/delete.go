@@ -17,13 +17,6 @@ func deleteTable(tb_name string) error {
 		return fmt.Errorf("表 %s 不存在", tb_name)
 	}
 
-	var sure_to_delete string
-	fmt.Printf("确认删除表 %s (y/n) ", tb_name)
-	fmt.Scanln(&sure_to_delete)
-	if sure_to_delete != "y" {
-		return fmt.Errorf("取消删除表 %s", tb_name)
-	}
-	
 	if os.Remove(table_path) != nil {
 		return fmt.Errorf("删除表 %s 失败", tb_name)
 	}

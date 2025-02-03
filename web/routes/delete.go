@@ -12,14 +12,14 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func RCreate(c *gin.Context) {
+func RDelete(c *gin.Context) {
 	table_name := c.Query("table_name")
 	if table_name == "" {
 		c.JSON(http.StatusOK, gin.H{"status": "err_empty_name"})
 		return
 	}
 
-	cmd := exec.Command(consts.CLI_PATH(), "create", c.Query("table_name"))
+	cmd := exec.Command(consts.CLI_PATH(), "delete", c.Query("table_name"))
 	// 创建一个Buffer来捕获输出
 	var out bytes.Buffer
 	cmd.Stdout = &out

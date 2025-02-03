@@ -12,5 +12,6 @@ func main() {
 		c.JSON(200, gin.H{"message": "Welcome to Finix!"})
 	})
 	r.GET("/create", routes.RCreate)
+	r.GET("/delete", routes.RDelete)
 	r.Run(":" + consts.PORT)
 }
