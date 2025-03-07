@@ -2,24 +2,36 @@ package routes
 
 import (
 	"bytes"
+	"finix-web/consts"
 	"fmt"
 	"net/http"
 	"os/exec"
 	"strings"
-
-	"finix-web/consts"
+	"encoding/json"
+	"log"
 
 	"github.com/gin-gonic/gin"
 )
 
-func RCreate(c *gin.Context) {
+func str2json(jsonData string) TableJSON {
+	var data TableJSON
+	err := json.Unmarshal([]byte(jsonData), &data)
+	if err != nil {
+		log.Fatalf("Error parsing JSON: %v", err)
+	}
+	return data
+}
+
+func RGet(c *gin.Context) {
+	c.Header("Content-Type", "application/json")
+
 	table_name := c.Query("table_name")
 	if table_name == "" {
 		c.JSON(http.StatusOK, gin.H{"status": "err_empty_table_name"})
 		return
 	}
 
-	cmd := exec.Command(consts.CLI_PATH(), "create", c.Query("table_name"))
+	cmd := exec.Command(consts.CLI_PATH(), "getdata", c.Query("table_name"))
 	// 创建一个Buffer来捕获输出
 	var out bytes.Buffer
 	cmd.Stdout = &out
@@ -28,7 +40,7 @@ func RCreate(c *gin.Context) {
 		c.JSON(
 			http.StatusOK,
 			gin.H{
-				"status": "error",
+				"status":     "error",
 				"table_name": table_name,
 				"output":     strings.Trim(out.String(), "\n"),
 				"error":      err.Error(),
@@ -36,7 +48,7 @@ func RCreate(c *gin.Context) {
 		)
 		return
 	}
-	fmt.Println(out.String())
-
-	c.JSON(http.StatusOK, gin.H{"status": "success"})
+	fmt.Println("读取了表: ", table_name)
+	fmt.Println("输出: ", out.String())
+	c.JSON(http.StatusOK, str2json(out.String()))
 }

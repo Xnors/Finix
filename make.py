@@ -8,6 +8,12 @@ except ImportError:
 
 console = console.Console()
 
+
+def run_cmd(cmd: str):
+    os.system(cmd)
+    console.log(f"执行命令：{cmd}", style="bold green")
+
+
 def main():
     if len(sys.argv) != 2:
         console.log("Usage: python make.py build|run")
@@ -27,6 +33,15 @@ def main():
             linux_run()
         elif os.name == "nt":
             windows_run()
+    elif sys.argv[1] == "clean":
+        run_cmd("go clean -cache")
+        os.chdir("./cli")
+        run_cmd("go mod tidy")
+        os.chdir("../")
+        os.chdir("./web")
+        run_cmd("go mod tidy")
+        os.chdir("../")
+
     else:
         console.log("Usage: python make.py build|run")
 
@@ -34,28 +49,27 @@ def main():
 def linux_run():
     linux_build()
     console.log("Linux 运行")
-    os.system("bin/finix-web")
+    run_cmd("bin/finix-web")
     pass
 
 
 def windows_run():
     windows_build()
     console.log("Windows 运行")
-    os.system("start http://localhost:8080")
-    os.system(r".\bin\finix-web.exe")
+    run_cmd(r".\bin\finix-web.exe")
     pass
 
 
 def linux_build():
     console.log("Linux 编译")
     os.chdir("./cli")
-    os.system("go build -x -o ../bin/finix")
-    os.system("chmod +x ../bin/finix")
+    run_cmd("go build -x -o ../bin/finix")
+    run_cmd("chmod +x ../bin/finix")
     os.chdir("../")
     console.log("已生成 bin/finix")
     os.chdir("./web")
-    os.system("go build -x -o ../bin/finix-web")
-    os.system("chmod +x ../bin/finix-web")
+    run_cmd("go build -x -o ../bin/finix-web")
+    run_cmd("chmod +x ../bin/finix-web")
     os.chdir("../")
     console.log("已生成 bin/finix-web")
     console.log("Linux 编译完成")
@@ -65,11 +79,11 @@ def linux_build():
 def windows_build():
     console.log("Windows 编译")
     os.chdir("./cli")
-    os.system("go build -x -o ../bin/finix.exe")
+    run_cmd("go build -x -o ../bin/finix.exe")
     os.chdir("../")
     console.log("已生成 bin/finix.exe")
     os.chdir("./web")
-    os.system("go build -x -o ../bin/finix-web.exe")
+    run_cmd("go build -x -o ../bin/finix-web.exe")
     os.chdir("../")
     console.log("已生成 bin/finix-web.exe")
     console.log("Windows 编译完成")

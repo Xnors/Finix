@@ -11,7 +11,7 @@ var rootCmd = &cobra.Command{
 	Short: "这是个资金流动管理程序",
 	Long: `这是一个资金流动管理程序
 
-制作方: 异或科技工作室 https://xnors.us.kg`,
+制作方: 异或科技工作室 https://github.com/xnors`,
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("感谢使用 Finix! 使用 finix -h 查看帮助信息")
 	},
@@ -28,6 +28,7 @@ func init() {
 	rootCmd.AddCommand(versionCmd)
 	rootCmd.AddCommand(CreateCmd)
 	rootCmd.AddCommand(DeleteCmd)
+	rootCmd.AddCommand(GetdataCmd)
 }
 
 func Execute() {

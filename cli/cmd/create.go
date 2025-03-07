@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"encoding/json"
 	"errors"
 	"fmt"
 	"os"
@@ -23,16 +24,27 @@ func createTable(tb_name string) error {
 	}
 	defer file.Close()
 
-	init_string := (fmt.Sprintf(
-		`[table-info]
-created_at = %s
+	// 	init_string := (fmt.Sprintf(
+	// 		`[table-info]
+	// created_at = %s
 
-[records]
-		`,
-		time.Now().Format("2006-01-02 15:04:05"),
-	))
+	// [records]
+	// 		`,
+	// 		time.Now().Format("2006-01-02 15:04:05"),
+	// 	))
+	init_struct := TableJSON{
+		TableInfo{
+			CreatedAt: time.Now().Format("2006-01-02 15:04:05"),
+		},
+		[]Record{},
+	}
 
-	_, err = file.WriteString(init_string)
+	init_string, err := json.Marshal(init_struct)
+	if err != nil {
+		return err
+	}
+
+	_, err = file.WriteString(string(init_string))
 	if err != nil {
 		return err
 	}
