@@ -1,0 +1,80 @@
+.table-container {
+  border-bottom: 1px solid #ccccccc4;
+  padding: max(calc(0.6vw + 0.4vh), 12px);
+  font-family: "deyihei";
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  .left-side {
+    width: 80%;
+    p {
+      max-width: 97%;
+      // 字体
+      font-family: "deyihei";
+      color: #a5a5a5;
+    }
+  }
+  #table-info {
+    margin-left: max(1.6vw,12px);
+    min-width: 10%;
+    color: #b1b1b1;
+    font-size: 0.9rem;
+    margin-top: max(1vh, 10px);
+    #created-by,
+    #created-at,
+    #total-cash-change {
+      border-left: #c7c7c7 1px solid;
+      padding-left: max(1vw, 10px);
+    }
+  }
+}
+@media screen and (max-width: 1260px) {
+  #table-info,p {
+    font-size: 0.8rem;
+    font-weight: lighter;
+  }
+}
+
+@media screen and (max-width: 910px) {
+  .table-container {
+    border-bottom: 1px solid #ccccccc4;
+    padding: max(calc(0.6vw + 0.4vh), 12px);
+    font-family: "deyihei";
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    .title-and-description {
+      width: 100%;
+      p {
+        max-width: 97%;
+        // 字体
+        font-family: "deyihei";
+        font-weight: lighter;
+        color: #c7c7c7;
+        font-size: 0.8rem;
+      }
+    }
+    #table-info {
+      width: 80%;
+      color: #b1b1b1;
+      font-size: 0.66rem;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: right;
+      gap: min(2vw, 5px);
+      margin-top: min(0.8vh, 8px);
+      #created-by,
+      #created-at,
+      #total-cash-change {
+        border: #929292 1px solid;
+        padding: 0.8px 3px;
+        width: auto;
+      }
+    }
+  }
+}

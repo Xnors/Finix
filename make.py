@@ -16,7 +16,7 @@ def run_cmd(cmd: str):
 
 def main():
     if len(sys.argv) != 2:
-        console.log("Usage: python make.py build|run")
+        console.log("Usage: python make.py build|run|clean")
         return
 
     if not os.path.exists("bin"):
@@ -43,7 +43,7 @@ def main():
         os.chdir("../")
 
     else:
-        console.log("Usage: python make.py build|run")
+        console.log("Usage: python make.py build|run|clean")
 
 
 def linux_run():
