@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/spf13/cobra"
 	"os"
+	"path/filepath"
 )
 
 func get_all_tables() error {
@@ -35,10 +36,12 @@ func get_all_tables() error {
 	}
 
 	for _, file := range files {
-		if !file.IsDir() {
+		fileName := file.Name()
+		tableName := fileName[:len(fileName)-5] // 去掉.json后缀
+		if (!file.IsDir()) && filepath.Ext(fileName) == ".json" {
 			// 这里应该是读取文件内容，然后解析json，然后添加到totalTables中
 			// 读取文件内容
-			fileContent, err := os.ReadFile(TABLES_DIR + "/" + file.Name())
+			fileContent, err := os.ReadFile(TABLES_DIR + "/" + fileName)
 			if err != nil {
 				return err
 			}
@@ -52,7 +55,7 @@ func get_all_tables() error {
 
 			// 添加到totalTables中
 			totalTables = append(totalTables, TableInfo{
-				Name:      file.Name(),
+				Name:      tableName,
 				TableData: tableJSON,
 			})
 		}

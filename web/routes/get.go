@@ -7,20 +7,9 @@ import (
 	"net/http"
 	"os/exec"
 	"strings"
-	"encoding/json"
-	"log"
 
 	"github.com/gin-gonic/gin"
 )
-
-func str2json(jsonData string) TableJSON {
-	var data TableJSON
-	err := json.Unmarshal([]byte(jsonData), &data)
-	if err != nil {
-		log.Fatalf("Error parsing JSON: %v", err)
-	}
-	return data
-}
 
 func RGet(c *gin.Context) {
 	c.Header("Content-Type", "application/json")
@@ -50,5 +39,5 @@ func RGet(c *gin.Context) {
 	}
 	fmt.Println("读取了表: ", table_name)
 	fmt.Println("输出: ", out.String())
-	c.JSON(http.StatusOK, str2json(out.String()))
+	c.JSON(http.StatusOK, Str2TableJSON(out.String()))
 }

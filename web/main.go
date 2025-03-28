@@ -21,5 +21,6 @@ func main() {
 	r.GET("/create", routes.RCreate)
 	r.GET("/delete", routes.RDelete)
 	r.GET("/get", routes.RGet)
+	r.GET("/get_all", routes.RGetAll)
 	r.Run(":" + consts.PORT)
 }
