@@ -11,10 +11,10 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func RGetAll(c *gin.Context) {
+func RGetInfo(c *gin.Context) {
 	c.Header("Content-Type", "application/json")
 
-	cmd := exec.Command(consts.CLI_PATH(), "get-all-tables")
+	cmd := exec.Command(consts.CLI_PATH(), "get-info")
 	// 创建一个Buffer来捕获输出
 	var out bytes.Buffer
 	cmd.Stdout = &out

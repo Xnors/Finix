@@ -30,6 +30,7 @@ func init() {
 	rootCmd.AddCommand(DeleteCmd)
 	rootCmd.AddCommand(GetdataCmd)
 	rootCmd.AddCommand(GetAllCmd)
+	rootCmd.AddCommand(GetInfoCmd)
 }
 
 func Execute() {

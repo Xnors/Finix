@@ -23,7 +23,8 @@ type TableJSON struct {
 	Records []Record  `json:"records"`
 }
 type TableInfo struct {
-	CreatedAt string `json:"created_at"`
+	CreatedAt   string `json:"created_at"`
+	Description string `json:"description"`
 }
 type Record struct {
 	Title     string  `json:"title"`
@@ -31,5 +32,3 @@ type Record struct {
 	CreatedAt string  `json:"created_at"`
 	Change    float32 `json:"change"`
 }
-
-

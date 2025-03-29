@@ -22,5 +22,6 @@ func main() {
 	r.GET("/delete", routes.RDelete)
 	r.GET("/get", routes.RGet)
 	r.GET("/get_all", routes.RGetAll)
+	r.GET("/get_info", routes.RGetInfo)
 	r.Run(":" + consts.PORT)
 }
