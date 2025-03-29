@@ -2,8 +2,8 @@ package routes
 
 import (
 	"encoding/json"
-	"log"
 	"fmt"
+	"log"
 )
 
 type TableJSON struct {
@@ -11,8 +11,10 @@ type TableJSON struct {
 	Records []Record  `json:"records"`
 }
 type TableInfo struct {
-	CreatedAt string `json:"created_at"`
+	CreatedAt   string `json:"created_at"`
+	Description string `json:"description"`
 }
+
 type Record struct {
 	Title     string  `json:"title"`
 	Comment   string  `json:"comment"`
@@ -20,10 +22,16 @@ type Record struct {
 	Change    float32 `json:"change"`
 }
 
-type TablesInfo struct {
+type TablesData struct {
 	// 表信息
 	Name      string    `json:"name"`
 	TableData TableJSON `json:"table_data"`
+}
+
+type TablesInfo struct {
+	// 表信息
+	Name    string    `json:"name"`
+	Info 	TableInfo `json:"table_info"`
 }
 
 func Str2TableJSON(jsonData string) TableJSON {
@@ -35,10 +43,9 @@ func Str2TableJSON(jsonData string) TableJSON {
 	return data
 }
 
-
-func str2ArrayTablesInfo(jsonData string) TablesInfo {
+func str2ArrayTablesData(jsonData string) TablesData {
 	fmt.Println("解析json数据 ", jsonData)
-	var data []TablesInfo
+	var data []TablesData
 	err := json.Unmarshal([]byte(jsonData), &data)
 	if err != nil {
 		log.Fatalf("Error parsing JSON: %v", err)
@@ -46,4 +53,3 @@ func str2ArrayTablesInfo(jsonData string) TablesInfo {
 	fmt.Println("解析到json数据 ", data)
 	return data[0]
 }
-

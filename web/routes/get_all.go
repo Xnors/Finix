@@ -31,5 +31,5 @@ func RGetAll(c *gin.Context) {
 		return
 	}
 	fmt.Println("输出: ", out.String())
-	c.JSON(http.StatusOK, str2ArrayTablesInfo(out.String()))
+	c.JSON(http.StatusOK, str2ArrayTablesData(out.String()))
 }
