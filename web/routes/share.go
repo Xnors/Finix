@@ -53,3 +53,14 @@ func str2ArrayTablesData(jsonData string) TablesData {
 	fmt.Println("解析到json数据 ", data)
 	return data[0]
 }
+
+func str2ArrayTablesInfo(jsonData string) TablesData {
+	fmt.Println("解析json数据 ", jsonData)
+	var data []TablesData
+	err := json.Unmarshal([]byte(jsonData), &data)
+	if err != nil {
+		log.Fatalf("Error parsing JSON: %v", err)
+	}
+	fmt.Println("解析到json数据 ", data)
+	return data[0]
+}
