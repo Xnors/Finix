@@ -54,9 +54,9 @@ func str2ArrayTablesData(jsonData string) TablesData {
 	return data[0]
 }
 
-func str2ArrayTablesInfo(jsonData string) []TablesData {
+func str2ArrayTablesInfo(jsonData string) []TablesInfo {
 	fmt.Println("解析json数据 ", jsonData)
-	var data []TablesData
+	var data []TablesInfo
 	err := json.Unmarshal([]byte(jsonData), &data)
 	if err != nil {
 		log.Fatalf("Error parsing JSON: %v", err)
