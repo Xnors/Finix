@@ -1,12 +1,18 @@
 .table-container {
   border-bottom: 1px solid #ccccccc4;
-  padding: max(calc(0.6vw + 0.4vh), 12px);
+  $t-padding: max(calc(0.6vw + 0.4vh), 12px);
+  padding: $t-padding;
   font-family: "deyihei";
+
+  --ripple-color: #afa7da80;
 
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+
+  min-width: calc(100% - 2 * $t-padding);
+
   .left-side {
     width: 80%;
     p {
@@ -17,7 +23,7 @@
     }
   }
   #table-info {
-    margin-left: max(1.6vw,12px);
+    margin-left: max(1.6vw, 12px);
     min-width: 10%;
     color: #b1b1b1;
     font-size: 0.9rem;
@@ -31,7 +37,8 @@
   }
 }
 @media screen and (max-width: 1260px) {
-  #table-info,p {
+  #table-info,
+  p {
     font-size: 0.8rem;
     font-weight: lighter;
   }
@@ -47,6 +54,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
+
     .title-and-description {
       width: 100%;
       p {

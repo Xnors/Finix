@@ -1,4 +1,5 @@
 import "./styles/Table.scss";
+import 'sober'
 
 function Table({
   tableName,
@@ -9,7 +10,7 @@ function Table({
 }) {
   return (
     <>
-      <div className="table-container">
+      <s-ripple className="table-container">
         <div className="title-and-description">
           <h1>{tableName}</h1>
           <p>{tableDescription}</p>
@@ -19,7 +20,7 @@ function Table({
           <div id="created-by">{createdBy}</div>
           <div id="created-at">{createdAt}</div>
         </div>
-      </div>
+      </s-ripple>
     </>
   );
 }

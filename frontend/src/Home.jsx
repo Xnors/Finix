@@ -1,8 +1,41 @@
 import "./styles/Home.scss";
 import "sober";
 import Table from "./Table";
+import { createSignal, createEffect, For, createResource } from "solid-js";
 
 function Home() {
+  const [data, setData] = createSignal(null);
+  createEffect(() => {
+    fetch("/get_info")
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((json) => {
+        setData(json);
+        console.log("获取数据成功! ", JSON.stringify(data()));
+      })
+      .catch((error) => console.error(error));
+  }, []);
+
+  let tables_elm = (
+    <div className="tables-box">
+      <For each={data()}>
+        {(table) => (
+          <Table
+            tableName={table.name.substring(0, table.name.length - 5)} // 去掉后缀: .json
+            tableDescription={table.table_info.description}
+            totalCashChange={"+3"}
+            createdBy={"XnorsCode"}
+            createdAt={table.table_info.created_at.split(" ")[0]} // 日期只取年月日
+          />
+        )}
+      </For>
+    </div>
+  );
+
   return (
     <>
       <div className="top-bar">
@@ -11,22 +44,7 @@ function Home() {
       </div>
       <div className="content">
         <s-button type="elevated"> New Table</s-button>
-        <div className="tables-box"> 
-          <Table
-            tableName={"Table 1"}
-            tableDescription={"Lorem ipsum dolor sit amet consectetur, adipisicing elit. Beatae ipsum voluptates dolor amet mollitia aliquam quos molestiae soluta doloremque debitis rem numquam, voluptatum, facere consequuntur, hic possimus sint! Voluptate, similique!"}
-            totalCashChange={"+114514"}
-            createdBy={"Fexcode"}
-            createdAt={"2021-01-01"}
-          />
-          <Table
-            tableName={"Xnors 专用"}
-            tableDescription={"Lorem ipsum dolor sit amet consectetur, adipisicing elit. Beatae ipsum voluptates dolor amet mollitia aliquam quos molestiae soluta doloremque debitis rem numquam, voluptatum, facere consequuntur, hic possimus sint! Voluptate, similique!"}
-            totalCashChange={"+3"}
-            createdBy={"XnorsCode"}
-            createdAt={"2025-03-22"}
-          />
-        </div>
+        {tables_elm}
       </div>
     </>
   );
