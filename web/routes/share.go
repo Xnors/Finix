@@ -7,7 +7,7 @@ import (
 )
 
 type TableJSON struct {
-	Info    TableInfo `json:"table-info"`
+	Info    TableInfo `json:"table_info"`
 	Records []Record  `json:"records"`
 }
 type TableInfo struct {
