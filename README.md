@@ -20,13 +20,13 @@ sudo apt-get install python3
 2. 克隆项目到本地
 
 ```bash
-git clone https://github.com/Finix-Protocol/Finix.git
+git clone https://github.com/Xnors/Finix.git
 ```
 
 > 注意, 目前项目正处于开发阶段, 调试请克隆 dev 分支
 >
 > ```bash
-> git clone -b dev https://github.com/Finix-Protocol/Finix.git
+> git clone https://github.com/Xnors/Finix.git -b dev
 > ```
 >
 > 3. 安装依赖
